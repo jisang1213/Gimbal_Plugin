@@ -132,13 +132,22 @@ class Gimbal{
       pitch.parent = &roll;
 
       //CHANGE THESE TO CORRECT LENS LOCATION:
-      Lcam.xyz << 0.00832, 0.03985, 0.01096;
-      Lcam.rpy << 0, 0, 0.349066;
-      Lcam.parent = &pitch;
+      Lcam_upright.xyz << 0.00832, 0.03985, 0.01096;
+      Lcam_upright.rpy << 0, 0, 0.349066;
+      Lcam_upright.parent = &pitch;
 
-      Rcam.xyz << 0.00832, -0.03385, 0.01096;
-      Rcam.rpy << 0, 0, -0.349066; 
-      Rcam.parent = &pitch;
+      Rcam_upright.xyz << 0.00832, -0.03385, 0.01096;
+      Rcam_upright.rpy << 0, 0, -0.349066; 
+      Rcam_upright.parent = &pitch;
+
+      //Final rotation since camera is vertical
+      Lcam.xyz << 0, 0, 0;
+      Lcam.rpy << -M_PI/2, 0, 0;
+      Lcam.parent = &Lcam_upright;
+
+      Rcam.xyz << 0, 0, 0;
+      Rcam.rpy << -M_PI/2, 0, 0; 
+      Rcam.parent = &Rcam_upright;
     }
 
     ~Gimbal(){
@@ -148,7 +157,7 @@ class Gimbal{
     }
   
   private:
-    Frame base, yaw, roll, pitch, Lcam, Rcam;
+    Frame base, yaw, roll, pitch, Lcam_upright, Rcam_upright, Lcam, Rcam;
     std::string port;
     int serial_fd;
 };

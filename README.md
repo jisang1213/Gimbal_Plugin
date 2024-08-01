@@ -10,6 +10,8 @@ The joint state is published to: 'gimbal_joint_state'
 The left camera transformation is published to 'transforms/d435i_front_L'
 The right camera transformation is published to 'transforms/d435i_front_R'
 
+**NOTE: The camera frame should be rotated by 90degrees to align with depth frame.
+
 The portname should be fixed to '/dev/gimbal'. Edit the udev rules as follows:
 ```bash
 sudo nano /etc/udev/rules.d/99-usb-serial.rules
@@ -23,7 +25,7 @@ Then reload rules
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
-##Logging
+## Logging
 Log directory can be specified in params
 Four log files are generated:
 - angular_vel.csv
