@@ -1,0 +1,38 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/foxy/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/gimbal_interface/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/polygon_base/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/polygon_plugins/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_controller/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_data_logger/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_ffmpeg_image_transport/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_gui_interface/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_joy_interface/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_lidar_helper/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_null_controller/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_parameter/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_plugin/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_rf/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_robot/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_sensor/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_soem/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin/raisin_util/include/**",
+        "/home/jakob/Desktop/ros2_ws/src/raisin_gimbal_plugin/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

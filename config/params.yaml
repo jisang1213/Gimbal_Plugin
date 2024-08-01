@@ -1,0 +1,7 @@
+gimbal_port:
+  value: /dev/gimbal
+  dtype: string
+
+log_directory:
+  value: ~/GIMBAL_LOG
+  dtpe: string

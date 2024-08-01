@@ -1,0 +1,37 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/jakob/Desktop/ros2_ws/install/raisin_yolov8_msg/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_util/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_torch/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_soem/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_plugin/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_robot/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_rf/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_lidar_helper/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_joy_interface/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_parameter/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_data_logger/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_raisimlib/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_gui_interface/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_ffmpeg_image_transport/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/raisin_interfaces/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/polygon_plugins/include/**",
+        "/home/jakob/Desktop/ros2_ws/install/polygon_base/include/**",
+        "/opt/ros/foxy/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
