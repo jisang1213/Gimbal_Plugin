@@ -14,6 +14,7 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "raisin_plugin/plugin.hpp"
 #include "raisin_parameter/parameter_container.hpp"
@@ -24,6 +25,8 @@
 #include <Eigen/Geometry>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <sys/stat.h> // for mkdir
 
 #include <unistd.h>
 #include <string>
@@ -34,6 +37,8 @@
 #include "gimbal.hpp"
 #include "recorder.hpp"
 
+#include "rclcpp/rclcpp.hpp"
+#include "std_srvs/srv/set_bool.hpp"  // Include the service definition
 
 namespace raisin
 {
@@ -43,7 +48,6 @@ namespace plugin
 class Gimbal_Plugin : public Plugin
 {
 public:
-
   Gimbal_Plugin(
     raisim::World & world, raisim::RaisimServer & server,
     raisim::World & worldSim, raisim::RaisimServer & serverSim, GlobalResource & globalResource);
@@ -55,14 +59,18 @@ public:
   bool init() final;
 
 private:
+  // Callback for the service
+  void handle_service(const std::shared_ptr<std_srvs::srv::SetBool::Request> request,
+                      std::shared_ptr<std_srvs::srv::SetBool::Response> response);
+
   double start_time;
-  std::ofstream ang_vel_log, command_log, rpy_log, joint_state_log;
-  RealSenseVideoRecorder recorder_;
+  std::ofstream ang_vel_log_base, ang_vel_log_cam, command_log, rpy_log, joint_state_log;
+  RealSenseVideoRecorder* recorder_;
 
   parameter::ParameterContainer & param_;
 
   //Gimbal data types
-  double dataToSend[3], receivedData[3];
+  double dataToSend[3], receivedData[6];
   Gimbal gimbal;
   Eigen::Matrix3d rotL, rotR;
   Eigen::Vector3d posL, posR;
@@ -74,8 +82,7 @@ private:
   rclcpp::Publisher<geometry_msgs::msg::Vector3>::SharedPtr jointstate;
   rclcpp::Publisher<geometry_msgs::msg::Transform>::SharedPtr pubL, pubR;
 
-  //lastest command message
-  geometry_msgs::msg::Vector3 command_;
+  rclcpp::Service<std_srvs::srv::SetBool>::SharedPtr service_;
 
   // Callback function for subscriber
   void messageCallback(const geometry_msgs::msg::Vector3::SharedPtr msg);

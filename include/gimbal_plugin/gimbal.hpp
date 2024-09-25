@@ -171,7 +171,7 @@ void Gimbal::configureGimbalPort() {
     // Open serial port
     std::cerr<< "Opening port." << std::endl;
     while (serial_fd < 0) {
-      serial_fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
+      serial_fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_SYNC); //  | O_NONBLOCK
     }
     std::cout << "Port opened." << std::endl;
 

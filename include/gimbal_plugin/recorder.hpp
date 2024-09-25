@@ -11,26 +11,13 @@
 #include <sstream>
 #include <filesystem>
 
+
 class RealSenseVideoRecorder
 {
 public:
-    RealSenseVideoRecorder()
-        : recording_(false), running_(true)
+    RealSenseVideoRecorder(std::string path)
+        : recording_(true), running_(true)
     {
-        // Define the directory and create it if necessary
-        std::string home_directory = std::getenv("HOME");  // Get home directory
-        std::filesystem::path video_directory = std::filesystem::path(home_directory) / "Gimbal_Log" / "Video";
-        
-        // Create the directory if it doesn't exist
-        if (!std::filesystem::exists(video_directory)) {
-            try {
-                std::filesystem::create_directories(video_directory);
-            } catch (const std::filesystem::filesystem_error& e) {
-                std::cerr << "Failed to create directory: " << e.what() << std::endl;
-                throw std::runtime_error("Failed to create directory");
-            }
-        }
-
         // Generate timestamp for filename
         std::time_t now = std::time(nullptr);
         std::tm tm = *std::localtime(&now);
@@ -39,10 +26,11 @@ public:
         std::string timestamp = ss.str();
 
         // Construct filename with timestamp
-        output_file_ = (video_directory / (timestamp + ".mp4")).string();  // Example filename format: Video/2024-06-28_15-30-00.mp4
+        output_file_ = path + "/" + (timestamp + ".mp4");  // Example filename format: Video/2024-06-28_15-30-00.mp4
 
         // Initialize OpenCV video writer with MP4 codec
-        video_writer_ = cv::VideoWriter(output_file_, cv::VideoWriter::fourcc('a', 'v', 'c', '1'), 30, cv::Size(1920, 1080));
+        // video_writer_ = cv::VideoWriter(output_file_, cv::VideoWriter::fourcc('a', 'v', 'c', '1'), 30, cv::Size(1920, 1080));
+        video_writer_ = cv::VideoWriter(output_file_, cv::VideoWriter::fourcc('m', 'p', '4', 'v'), 30, cv::Size(1920, 1080));
         if (!video_writer_.isOpened()) {
             throw std::runtime_error("Failed to open video writer");
         }
@@ -50,7 +38,8 @@ public:
         // Initialize RealSense pipeline
         rs2::config cfg;
         cfg.enable_stream(rs2_stream::RS2_STREAM_COLOR, 1920, 1080, rs2_format::RS2_FORMAT_BGR8, 30);
-        pipe_.start(cfg);
+
+        pipe_.start(cfg);   // PROBLEM IS HERE !!!
 
         // Calculate the time duration for each frame
         frame_duration_ = std::chrono::milliseconds(1000 / 30);
@@ -111,7 +100,12 @@ public:
     void stopRecording()
     {
         recording_ = false;
-        std::cout << "Stopped recording." << std::endl;
+        running_ = false;
+        if (capture_thread_.joinable()) {
+            capture_thread_.join();
+        }
+        video_writer_.release();
+        std::cout << "Recording stopped and resources released." << std::endl;
     }
     
 private:

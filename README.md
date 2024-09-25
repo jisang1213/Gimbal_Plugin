@@ -10,14 +10,14 @@ The joint state is published to: 'gimbal_joint_state'
 The left camera transformation is published to 'transforms/d435i_front_L'
 The right camera transformation is published to 'transforms/d435i_front_R'
 
-**NOTE: The camera frame should be rotated by 90degrees to align with depth frame.
+**NOTE: The camera frame should be rotated by 90 degrees to align with depth frame.
 
 The portname should be fixed to '/dev/gimbal'. Edit the udev rules as follows:
 ```bash
 sudo nano /etc/udev/rules.d/99-usb-serial.rules
 ```
 
-Add the following line:
+Add the following line with appropriate idVendor and idProduct
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="367C344F3132", SYMLINK+="gimbal", MODE="0777"
 
 Then reload rules

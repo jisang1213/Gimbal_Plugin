@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(gimbal_plugin)
+project(raisin_gimbal_com_plugin)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -22,6 +22,7 @@ find_package(Eigen3 REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(realsense2 REQUIRED)
 find_package(raisim REQUIRED)
+find_package(std_srvs REQUIRED)
 
 include_directories(include ${EIGEN3_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS})
 
@@ -41,6 +42,7 @@ ament_target_dependencies(${PROJECT_NAME}
   raisin_plugin
   cv_bridge
   realsense2
+  std_srvs
 )
 
 set(CMAKE_PREFIX_PATH "/path/to/raisim" ${CMAKE_PREFIX_PATH})

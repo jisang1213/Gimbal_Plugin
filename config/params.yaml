@@ -3,5 +3,5 @@ gimbal_port:
   dtype: string
 
 log_directory:
-  value: ~/GIMBAL_LOG
-  dtpe: string
+  value: GIMBAL_LOG
+  dtype: string
